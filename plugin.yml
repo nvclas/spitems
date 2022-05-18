@@ -1,0 +1,7 @@
+main: de.theniclas.items.main.Main
+name: SpecialItems
+author: nvclas
+version: 0
+
+commands:
+   spitems:
