@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import de.theniclas.items.commands.CMDspitems;
 import de.theniclas.items.items.GoldenHead;
+import de.theniclas.items.items.IceSword;
 import de.theniclas.items.items.OitcBow;
 
 public class Main extends JavaPlugin {
@@ -17,6 +18,7 @@ public class Main extends JavaPlugin {
 		
 		Bukkit.getPluginManager().registerEvents(new GoldenHead(), this);
 		Bukkit.getPluginManager().registerEvents(new OitcBow(), this);
+		Bukkit.getPluginManager().registerEvents(new IceSword(), this);
 		
 		getCommand("spitems").setExecutor(new CMDspitems());
 		
