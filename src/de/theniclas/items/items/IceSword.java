@@ -32,6 +32,7 @@ public class IceSword extends SpecialItem implements Listener {
 		Player damager = (Player) event.getDamager();
 		if(!checkItem(damager.getItemInHand()))
 			return;
+		event.setDamage(0);
 		frozen.put(p, 5);
 		p.sendMessage("§eDu wurdest für §c5 §eSekunden eingefroren");
 		if(task != null)
@@ -45,10 +46,8 @@ public class IceSword extends SpecialItem implements Listener {
 					p.sendMessage("§eDu wurdest aufgetaut");
 					cancel();
 				}
-				try {
+				if(frozen.get(p) != null)
 					frozen.put(p, frozen.get(p) - 1);
-				} catch (NullPointerException e) {
-				}
 			}
 		}.runTaskTimerAsynchronously(Main.getPlugin(), 0, 20);
 	}
