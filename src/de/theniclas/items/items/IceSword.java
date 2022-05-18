@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -22,16 +23,23 @@ public class IceSword extends SpecialItem implements Listener {
 		super("§eEisschwert", Material.GOLD_SWORD);
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onUsage(EntityDamageByEntityEvent event) {
 		if(!(event.getEntity() instanceof Player))
 			return;
+		Player p = (Player) event.getEntity();
+		if(event.getFinalDamage() >= p.getHealth()) {
+			frozen.remove(p);
+			if(task != null)
+				task.cancel();
+			return;
+		}
 		if(!(event.getDamager() instanceof Player))
 			return;
-		Player p = (Player) event.getEntity();
 		Player damager = (Player) event.getDamager();
 		if(!checkItem(damager.getItemInHand()))
 			return;
+		damager.setItemInHand(null);
 		event.setDamage(0);
 		frozen.put(p, 5);
 		p.sendMessage("§eDu wurdest für §c5 §eSekunden eingefroren");
