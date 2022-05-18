@@ -56,8 +56,9 @@ public class IceSword extends SpecialItem implements Listener {
 	public void onMove(PlayerMoveEvent e) {
 		if(!frozen.containsKey(e.getPlayer()))
 			return;
-		if(e.getTo().getX() != e.getFrom().getX() || e.getTo().getZ() != e.getFrom().getZ()) {
+		if(e.getTo().getX() != e.getFrom().getX() || e.getTo().getZ() != e.getFrom().getZ() || e.getTo().getY() != e.getFrom().getY()) {
 			e.setTo(e.getFrom());
+			e.getPlayer().setFallDistance(0);
 		}
 	}
 
